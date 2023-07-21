@@ -1,37 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
-import {useState, useRef} from "react";
+import {useEffect, useRef} from "react";
 
 function App() {
-    const [renderer, setRenderer] = useState(0)
-    const countRef = useRef(0)
-    let countVar = 0
+    const inputRef = useRef()
 
-    const doRendering = () => {
-        setRenderer(renderer+1)
-    }
-    const increaseRef = () => {
-        countRef.current = countRef.current + 1
-        console.log('ref: ', countRef.current)
-    }
+    useEffect(()=>{
+        console.log(inputRef)
+        inputRef.current.focus()
+    },[])
 
-    const increaseVar = () => {
-        countVar = countVar + 1
-        console.log('var: ', countVar)
-    }
-
-    const printResults = () => {
-        console.log(`ref: ${countRef.current}, var: ${countVar}`)
+    const login = () => {
+        alert(`환영합니다 ${inputRef.current.value}!`)
+        inputRef.current.focus()
     }
 
     return (
         <div>
-            <p>Ref: {countRef.current}</p>
-            <p>Var: {countVar}</p>
-            <button onClick={doRendering}>렌더!</button>
-            <button onClick={increaseRef}>Ref 올려</button>
-            <button onClick={increaseVar}>Var 올려</button>
-            <button onClick={printResults}>Ref Var 값 출력</button>
+            <input ref={inputRef} type='text' placeholder='username'/>
+            <button onClick={login}>로그인</button>
         </div>
     );
 }
